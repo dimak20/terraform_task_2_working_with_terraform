@@ -1,0 +1,5 @@
+location             = "France Central"
+resource_group_name  = "materesourcegroup1"
+storage_account_name = "matestorageaccount1"
+container_name       = "matecontainer1"
+blob_name            = "mateblob1"
