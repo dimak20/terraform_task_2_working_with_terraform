@@ -26,17 +26,16 @@ resource "azurerm_storage_container" "mate-container" {
   container_access_type = "private"
 }
 
+data "archive_file" "code_zip" {
+  type        = "zip"
+  source_dir  = "${path.module}/main.tf"
+  output_path = "${path.module}/app.zip"
+}
+
 resource "azurerm_storage_blob" "mate-blob" {
   name                   = var.blob_name
   storage_account_name   = azurerm_storage_account.mate-storage.name
   storage_container_name = azurerm_storage_container.mate-container.name
   type                   = "Block"
-  source        = "../code/code.zip"
-}
-
-output "blob_id" {
-  value = azurerm_storage_blob.mate-blob.id
-}
-output "blob_url" {
-  value = azurerm_storage_blob.mate-blob.url
+  source        = data.archive_file.code_zip.output_path
 }
