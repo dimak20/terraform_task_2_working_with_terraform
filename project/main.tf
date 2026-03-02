@@ -28,7 +28,7 @@ resource "azurerm_storage_container" "mate-container" {
 
 data "archive_file" "code_zip" {
   type        = "zip"
-  source_dir  = "${path.module}/main.tf"
+  source_dir  = "${path.module}"
   output_path = "${path.module}/app.zip"
 }
 
